@@ -1,0 +1,11 @@
+{
+  "name": "smartgb-global-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for SmartGB Global.",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev",
+    "check": "node --check script.js"
+  }
+}
