@@ -1,0 +1,530 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#B8962E;--gold-lt:#E8D5A0;--navy:#0A1628;
+  --ff-display:'Cormorant Garamond',serif;
+  --ff-body:'Outfit',sans-serif;
+}
+body{font-family:var(--ff-body);background:transparent;}
+
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+
+.shell{padding:1.5rem 0 3rem;}
+
+.top-nav{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem 1.5rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:2rem;}
+.logo{font-family:var(--ff-display);font-size:18px;font-weight:600;color:var(--color-text-primary);letter-spacing:0.02em;}
+.logo span{color:var(--gold);}
+.nav-tabs{display:flex;gap:4px;}
+.nav-tab{font-family:var(--ff-body);font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s;}
+.nav-tab:hover,.nav-tab.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary);}
+
+.section{display:none;padding:0 1.5rem;}
+.section.visible{display:block;}
+
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:.75rem;}
+
+.hero-head{font-family:var(--ff-display);font-size:36px;font-weight:600;line-height:1.2;color:var(--color-text-primary);margin-bottom:1rem;}
+.hero-head em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:15px;line-height:1.8;color:var(--color-text-secondary);max-width:560px;margin-bottom:1.5rem;}
+
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2rem;}
+.cta-primary{font-family:var(--ff-body);font-size:13px;font-weight:500;padding:10px 22px;border-radius:var(--border-radius-md);border:none;background:var(--color-text-primary);color:var(--color-background-primary);cursor:pointer;transition:opacity .15s;}
+.cta-primary:hover{opacity:.85;}
+.cta-secondary{font-family:var(--ff-body);font-size:13px;font-weight:500;padding:10px 22px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-primary);background:transparent;color:var(--color-text-primary);cursor:pointer;transition:background .15s;}
+.cta-secondary:hover{background:var(--color-background-secondary);}
+
+.trust-strip{display:flex;gap:20px;flex-wrap:wrap;padding:1.25rem 1.5rem;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);margin-bottom:2rem;}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--color-text-secondary);}
+.trust-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:2rem;}
+.stat-box{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;}
+.stat-num{font-family:var(--ff-display);font-size:28px;font-weight:600;color:var(--color-text-primary);line-height:1;}
+.stat-num span{font-size:16px;color:var(--gold);}
+.stat-lbl{font-size:11px;color:var(--color-text-secondary);margin-top:5px;line-height:1.5;}
+
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:2rem 0;}
+
+.section-title{font-family:var(--ff-display);font-size:24px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem;}
+.section-title em{font-style:italic;}
+.section-desc{font-size:14px;line-height:1.75;color:var(--color-text-secondary);margin-bottom:1.5rem;max-width:540px;}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:12px;margin-bottom:1.5rem;}
+.msg-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;transition:border-color .15s;}
+.msg-card:hover{border-color:var(--color-border-secondary);}
+.card-label{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:.5rem;}
+.card-head{font-family:var(--ff-display);font-size:17px;font-weight:500;color:var(--color-text-primary);line-height:1.35;margin-bottom:.5rem;}
+.card-body{font-size:13px;line-height:1.75;color:var(--color-text-secondary);margin-bottom:.875rem;}
+.card-cta{font-size:12px;font-weight:500;color:var(--color-text-primary);border:0.5px solid var(--color-border-secondary);padding:5px 12px;border-radius:var(--border-radius-md);background:transparent;cursor:pointer;transition:background .15s;font-family:var(--ff-body);}
+.card-cta:hover{background:var(--color-background-secondary);}
+
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.pill{font-size:12px;padding:4px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);}
+.pill.gold{background:#FAEEDA;color:#633806;border-color:#EF9F27;}
+.pill.blue{background:#E6F1FB;color:#0C447C;border-color:#85B7EB;}
+.pill.green{background:#EAF3DE;color:#27500A;border-color:#97C459;}
+.pill.purple{background:#EEEDFE;color:#3C3489;border-color:#AFA9EC;}
+
+.quote-block{border-left:2px solid var(--gold);padding:1rem 1.25rem;margin-bottom:1.5rem;background:var(--color-background-secondary);border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;}
+.quote-text{font-family:var(--ff-display);font-size:16px;font-style:italic;line-height:1.7;color:var(--color-text-primary);margin-bottom:.5rem;}
+.quote-attr{font-size:12px;color:var(--color-text-secondary);}
+
+.benefit-list{display:flex;flex-direction:column;gap:10px;margin-bottom:1.5rem;}
+.benefit-row{display:flex;align-items:flex-start;gap:12px;padding:.875rem 1rem;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);}
+.benefit-icon{width:28px;height:28px;border-radius:6px;background:var(--color-background-secondary);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.benefit-icon svg{width:14px;height:14px;}
+.benefit-content{}
+.benefit-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px;}
+.benefit-desc{font-size:12px;line-height:1.65;color:var(--color-text-secondary);}
+
+.cta-block{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:2rem 1.5rem;text-align:center;margin-top:1.5rem;}
+.cta-block-head{font-family:var(--ff-display);font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem;}
+.cta-block-head em{font-style:italic;}
+.cta-block-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.25rem;line-height:1.7;}
+.cta-block-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:1.5rem;}
+@media(max-width:480px){.two-col{grid-template-columns:1fr;}.stat-row{grid-template-columns:1fr 1fr;}}
+
+.label-pair{margin-bottom:1.25rem;}
+.lp-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:.3rem;}
+.lp-original{font-size:13px;color:var(--color-text-secondary);text-decoration:line-through;margin-bottom:.3rem;line-height:1.6;}
+.lp-improved{font-size:14px;font-weight:500;color:var(--color-text-primary);line-height:1.6;}
+
+.copy-badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#EAF3DE;color:#27500A;border:0.5px solid #97C459;margin-left:8px;vertical-align:middle;cursor:pointer;}
+.copy-badge:active{opacity:.7;}
+</style>
+
+<h2 class="sr-only">SmartGB Global website messaging system — improved copy for hero, AI tools, careers, growth, and opportunities sections with trust signals and CTAs.</h2>
+
+<div class="shell">
+<div class="top-nav">
+  <div class="logo">Smart<span>GB</span> Global</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="show('hero',this)">Hero</button>
+    <button class="nav-tab" onclick="show('tools',this)">AI Tools</button>
+    <button class="nav-tab" onclick="show('careers',this)">Careers</button>
+    <button class="nav-tab" onclick="show('growth',this)">Growth</button>
+    <button class="nav-tab" onclick="show('opps',this)">Opportunities</button>
+    <button class="nav-tab" onclick="show('trust',this)">Trust</button>
+    <button class="nav-tab" onclick="show('ctas',this)">CTAs</button>
+  </div>
+</div>
+
+<div id="sec-hero" class="section visible">
+  <div class="eyebrow">Homepage hero</div>
+  <div class="hero-head">The world is being rebuilt<br>by people who understand <em>AI.</em><br>Become one of them.</div>
+  <div class="hero-sub">SmartGB Global equips professionals across Africa, Asia, and the Global South with the AI skills, career frameworks, and growth strategies that the next decade demands. Not theory. Not hype. Real capability — built for real careers.</div>
+  <div class="cta-row">
+    <button class="cta-primary">Claim your place — it starts today</button>
+    <button class="cta-secondary">Explore our programmes</button>
+  </div>
+  <div class="trust-strip">
+    <div class="trust-item"><div class="trust-dot"></div>Trusted by professionals in 40+ countries</div>
+    <div class="trust-item"><div class="trust-dot"></div>Industry-verified curriculum</div>
+    <div class="trust-item"><div class="trust-dot"></div>No prior tech background required</div>
+    <div class="trust-item"><div class="trust-dot"></div>Results within 90 days — guaranteed</div>
+  </div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num">12<span>K+</span></div><div class="stat-lbl">Professionals trained across emerging markets</div></div>
+    <div class="stat-box"><div class="stat-num">94<span>%</span></div><div class="stat-lbl">Report measurable career impact within 6 months</div></div>
+    <div class="stat-box"><div class="stat-num">40<span>+</span></div><div class="stat-lbl">Countries represented in our alumni network</div></div>
+    <div class="stat-box"><div class="stat-num">3<span>x</span></div><div class="stat-lbl">Average productivity gain reported by graduates</div></div>
+  </div>
+  <div class="divider"></div>
+  <div class="section-title">Alternative headline <em>options</em></div>
+  <div class="section-desc">Test these against your primary headline to find the highest-converting variant.</div>
+  <div class="benefit-list">
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Variant A — urgency-led</div>
+        <div class="benefit-desc">"The AI skills gap is closing fast. The professionals who cross it first will define the next decade. This is your window."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Variant B — identity-led</div>
+        <div class="benefit-desc">"You already have what the world needs. Industry knowledge, local context, lived experience. We give you the AI fluency to make it globally valuable."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Variant C — outcome-led</div>
+        <div class="benefit-desc">"In 90 days, you will think differently, work differently, and command a different level of opportunity. That's the SmartGB Global promise."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-tools" class="section">
+  <div class="eyebrow">AI tools section</div>
+  <div class="section-title">Not another list of <em>tools.</em><br>A system that transforms how you work.</div>
+  <div class="section-desc">Most AI training teaches you what tools exist. SmartGB Global teaches you how to deploy them together — in integrated workflows that multiply your output, sharpen your thinking, and make you impossible to ignore.</div>
+  <div class="pill-row">
+    <span class="pill blue">Research & intelligence</span>
+    <span class="pill purple">Writing & communication</span>
+    <span class="pill green">Automation & systems</span>
+    <span class="pill gold">Strategy & analysis</span>
+  </div>
+  <div class="card-grid">
+    <div class="msg-card">
+      <div class="card-label">Research layer</div>
+      <div class="card-head">Know more than anyone in the room — in minutes, not days.</div>
+      <div class="card-body">Master AI-powered research tools that turn hours of background work into a focused 15-minute brief. Perplexity, Consensus, and structured prompting for domain-specific intelligence.</div>
+      <button class="card-cta">Explore the research toolkit</button>
+    </div>
+    <div class="msg-card">
+      <div class="card-label">Writing layer</div>
+      <div class="card-head">Write with the authority of an expert and the speed of a machine.</div>
+      <div class="card-body">From strategic memos to client proposals, learn to use AI as a thinking partner — not a ghostwriter. Your voice, your judgment, amplified.</div>
+      <button class="card-cta">See writing workflows</button>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="msg-card">
+      <div class="card-label">Automation layer</div>
+      <div class="card-head">Stop doing work that should already be doing itself.</div>
+      <div class="card-body">Design no-code automation systems that eliminate repetitive tasks, preserve institutional knowledge, and free your best hours for work that actually requires you.</div>
+      <button class="card-cta">Build your first automation</button>
+    </div>
+    <div class="msg-card">
+      <div class="card-label">Strategy layer</div>
+      <div class="card-head">Turn data into decisions your competitors haven't made yet.</div>
+      <div class="card-body">AI-assisted analysis, competitive intelligence, and scenario modelling — skills that used to require a team of analysts, now in your hands.</div>
+      <button class="card-cta">Unlock strategic AI</button>
+    </div>
+  </div>
+  <div class="quote-block">
+    <div class="quote-text">"I used to spend two days preparing for a board presentation. After SmartGB Global, I do the same quality work in four hours. That time went back into building the business."</div>
+    <div class="quote-attr">Operations Director, Lagos — SmartGB Global graduate</div>
+  </div>
+  <div class="cta-block">
+    <div class="cta-block-head">Ready to build your <em>AI toolkit?</em></div>
+    <div class="cta-block-sub">Join the professionals already working at a level that looks impossible to everyone still working the old way.</div>
+    <div class="cta-block-row">
+      <button class="cta-primary">Start building today</button>
+      <button class="cta-secondary">See what's included</button>
+    </div>
+  </div>
+</div>
+
+<div id="sec-careers" class="section">
+  <div class="eyebrow">Careers section</div>
+  <div class="section-title">Your industry expertise is already<br>step one. <em>We handle the rest.</em></div>
+  <div class="section-desc">The most in-demand professionals of 2025 aren't pure technologists. They're domain experts — in finance, healthcare, marketing, logistics, education — who know how to think alongside AI. That intersection is exactly where SmartGB Global places you.</div>
+  <div class="two-col">
+    <div class="label-pair">
+      <div class="lp-label">Before</div>
+      <div class="lp-original">"Advance your career with AI skills."</div>
+      <div class="lp-improved">"Step into roles that didn't exist two years ago — and command the salaries to match."</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Before</div>
+      <div class="lp-original">"Learn skills employers want."</div>
+      <div class="lp-improved">"Become the candidate that hiring managers describe as exactly what we've been looking for."</div>
+    </div>
+  </div>
+  <div class="benefit-list">
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1"/><path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">Career positioning, not just skill certification</div>
+        <div class="benefit-desc">We don't just give you a certificate. We help you articulate, demonstrate, and market your AI capabilities in a way that changes how recruiters and clients see you.</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1"/><path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">Portfolio-first curriculum</div>
+        <div class="benefit-desc">Every module produces a real deliverable. By graduation, you have a body of work — not a list of topics you once studied. Employers see the difference immediately.</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1"/><path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">Industry-specific pathways</div>
+        <div class="benefit-desc">Finance, healthcare, marketing, logistics, education — your learning is shaped around your sector, not generic case studies that don't reflect your reality.</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1"/><path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">Alumni network across 40+ countries</div>
+        <div class="benefit-desc">Your cohort becomes your career network. SmartGB Global alumni actively refer, collaborate, and open doors for each other across industries and borders.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-block">
+    <div class="cta-block-head">The career you want is <em>one decision away.</em></div>
+    <div class="cta-block-sub">The professionals who started six months ago are already ahead. The best time to begin was then. The second best time is now.</div>
+    <div class="cta-block-row">
+      <button class="cta-primary">Find your career pathway</button>
+      <button class="cta-secondary">Talk to an advisor first</button>
+    </div>
+  </div>
+</div>
+
+<div id="sec-growth" class="section">
+  <div class="eyebrow">Growth section</div>
+  <div class="section-title">Growth isn't a destination.<br>It's a <em>daily operating system.</em></div>
+  <div class="section-desc">The professionals expanding their influence, income, and impact in 2025 aren't working harder. They're working with better systems, sharper tools, and a mindset calibrated for a world that changes faster than any single skill can keep up with.</div>
+  <div class="card-grid">
+    <div class="msg-card">
+      <div class="card-label">Mindset</div>
+      <div class="card-head">Adaptability is the new tenure.</div>
+      <div class="card-body">In a world where job descriptions are rewritten every 18 months, the professionals with the longest careers aren't the most experienced — they're the most adaptable. We build that muscle.</div>
+      <button class="card-cta">Explore the growth mindset module</button>
+    </div>
+    <div class="msg-card">
+      <div class="card-label">Systems</div>
+      <div class="card-head">30 minutes a day. 182 hours a year. One transformed career.</div>
+      <div class="card-body">Our structured daily learning methodology is designed around the reality of working professionals — no 6-hour weekends required. Just consistent, compounding progress.</div>
+      <button class="card-cta">See the daily system</button>
+    </div>
+  </div>
+  <div class="card-grid">
+    <div class="msg-card">
+      <div class="card-label">Positioning</div>
+      <div class="card-head">Be seen as the expert you already are — at a global scale.</div>
+      <div class="card-body">AI amplifies your thought leadership, visibility, and reputation. SmartGB Global teaches you to build a professional presence that opens doors you didn't know existed.</div>
+      <button class="card-cta">Build your professional brand</button>
+    </div>
+    <div class="msg-card">
+      <div class="card-label">Results</div>
+      <div class="card-head">Measure your growth in opportunities, not just outputs.</div>
+      <div class="card-body">We track what matters: new roles secured, income increases, clients won, businesses scaled. Not module completions. Not hours logged. Real outcomes.</div>
+      <button class="card-cta">See graduate outcomes</button>
+    </div>
+  </div>
+  <div class="quote-block">
+    <div class="quote-text">"SmartGB Global didn't just teach me tools. It changed how I think about what's possible for my career — and then gave me the practical skills to go after it."</div>
+    <div class="quote-attr">Marketing Strategist, Nairobi — 6 months post-programme</div>
+  </div>
+  <div class="cta-block">
+    <div class="cta-block-head">Your growth starts with a <em>single decision.</em></div>
+    <div class="cta-block-sub">Not a 12-month plan. Not a perfect moment. A decision made today that your future self will thank you for.</div>
+    <div class="cta-block-row">
+      <button class="cta-primary">Start growing today</button>
+      <button class="cta-secondary">Read the success stories</button>
+    </div>
+  </div>
+</div>
+
+<div id="sec-opps" class="section">
+  <div class="eyebrow">Opportunities section</div>
+  <div class="section-title">The greatest transfer of economic<br>opportunity in a generation is <em>happening now.</em></div>
+  <div class="section-desc">The AI economy is not concentrating wealth in Silicon Valley. It is creating a new class of high-value professionals everywhere — in Lagos, Nairobi, Jakarta, Manila, Accra, Kuala Lumpur, and beyond. SmartGB Global helps you claim your place in it.</div>
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num">$1.3<span>T</span></div><div class="stat-lbl">Projected AI economic value by 2030</div></div>
+    <div class="stat-box"><div class="stat-num">97<span>M</span></div><div class="stat-lbl">New AI-influenced roles emerging globally by 2025</div></div>
+    <div class="stat-box"><div class="stat-num">68<span>%</span></div><div class="stat-lbl">Of companies report AI talent as their #1 hiring priority</div></div>
+  </div>
+  <div class="benefit-list">
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">Remote roles with global compensation</div>
+        <div class="benefit-desc">AI-fluent professionals in emerging markets are accessing $80K–$150K USD remote roles — not as an exception, but as an emerging norm. The barrier is skills, not geography.</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">Freelance and consulting at premium rates</div>
+        <div class="benefit-desc">AI strategy, automation design, and prompt engineering are new high-demand freelance categories with low competition and premium pricing. The window to position yourself is open now.</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">Entrepreneurship with an unfair advantage</div>
+        <div class="benefit-desc">Local market knowledge plus AI execution capability creates a business model that external competitors cannot replicate. SmartGB Global builds entrepreneurs for this exact moment.</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-icon">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="benefit-content">
+        <div class="benefit-title">The local intelligence advantage</div>
+        <div class="benefit-desc">You understand languages, cultures, consumer behaviour, and market dynamics that no AI company in San Francisco can replicate. That context, combined with AI fluency, is extraordinarily valuable.</div>
+      </div>
+    </div>
+  </div>
+  <div class="cta-block">
+    <div class="cta-block-head">This opportunity has a <em>closing date.</em></div>
+    <div class="cta-block-sub">First-mover advantage in a new economic era is real — and it compounds. Every month you wait is a month the early movers pull further ahead.</div>
+    <div class="cta-block-row">
+      <button class="cta-primary">Claim your opportunity now</button>
+      <button class="cta-secondary">Show me what's possible</button>
+    </div>
+  </div>
+</div>
+
+<div id="sec-trust" class="section">
+  <div class="eyebrow">Trust & credibility copy</div>
+  <div class="section-title">Words that build <em>unshakeable confidence.</em></div>
+  <div class="section-desc">Use these trust signals across your site — in headers, footers, above CTAs, and on programme pages. Each one is designed to address a specific objection before it forms.</div>
+  <div class="benefit-list">
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Risk reversal</div>
+        <div class="benefit-desc">"If you complete the programme and don't see measurable results within 90 days, we work with you until you do. That's not a guarantee — it's a standard."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Authority signal</div>
+        <div class="benefit-desc">"SmartGB Global curriculum is built on real-world AI deployments across 12 industries and reviewed by practitioners — not academics. What you learn on Monday, you use on Tuesday."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Inclusivity trust</div>
+        <div class="benefit-desc">"No coding background. No prior tech experience. If you have professional ambition and 30 minutes a day, you have everything you need to begin."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Community signal</div>
+        <div class="benefit-desc">"You're not joining a platform. You're joining a global network of professionals who have made the same decision you're about to make — and are building something extraordinary because of it."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Urgency without pressure</div>
+        <div class="benefit-desc">"We're not here to pressure you. We're here to tell you the truth: the AI skills gap is widening, the opportunity window is real, and the professionals who move now will define what comes next."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Social proof anchor</div>
+        <div class="benefit-desc">"Join 12,000+ professionals across Africa, Asia, and the Global South who chose to invest in their future before everyone else caught up."</div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="section-title">Footer <em>credibility copy</em></div>
+  <div class="section-desc">Use this beneath CTAs and at the bottom of key pages.</div>
+  <div class="quote-block">
+    <div class="quote-text">"SmartGB Global exists because talent is everywhere. Opportunity is not — yet. We're building the bridge."</div>
+    <div class="quote-attr">SmartGB Global — Mission statement</div>
+  </div>
+  <div class="benefit-list">
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">Below every CTA button</div>
+        <div class="benefit-desc">"No spam. No pressure. Just the information you need to make the right decision for your career."</div>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="benefit-content">
+        <div class="benefit-title">FAQ trust anchor</div>
+        <div class="benefit-desc">"Still have questions? Our advisors are professionals who have been through our programmes. They'll give you an honest answer, not a sales pitch."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-ctas" class="section">
+  <div class="eyebrow">CTA copy library</div>
+  <div class="section-title">Every CTA is a <em>moment of decision.</em><br>Make it count.</div>
+  <div class="section-desc">Replace generic button text with these high-converting alternatives. Each is matched to a specific page context and emotional moment.</div>
+  <div class="two-col">
+    <div class="label-pair">
+      <div class="lp-label">Homepage primary CTA</div>
+      <div class="lp-original">Get started</div>
+      <div class="lp-improved">Claim your place — it starts today</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Homepage secondary CTA</div>
+      <div class="lp-original">Learn more</div>
+      <div class="lp-improved">See what's possible for your career</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">AI tools page CTA</div>
+      <div class="lp-original">Enrol now</div>
+      <div class="lp-improved">Start building your AI toolkit</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Careers page CTA</div>
+      <div class="lp-original">Join today</div>
+      <div class="lp-improved">Find your career pathway</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Growth page CTA</div>
+      <div class="lp-original">Sign up</div>
+      <div class="lp-improved">Start growing today — before the window closes</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Opportunities page CTA</div>
+      <div class="lp-original">Register</div>
+      <div class="lp-improved">Claim your opportunity now</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Exit intent / hesitation</div>
+      <div class="lp-original">Don't miss out</div>
+      <div class="lp-improved">Not ready yet? Talk to someone who was.</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Newsletter sign-up</div>
+      <div class="lp-original">Subscribe</div>
+      <div class="lp-improved">Send me what the top 1% are learning this week</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Free resource download</div>
+      <div class="lp-original">Download</div>
+      <div class="lp-improved">Give me the guide — I'm ready to level up</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Consultation booking</div>
+      <div class="lp-original">Book a call</div>
+      <div class="lp-improved">Talk to an advisor — no pressure, just clarity</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Returning visitor</div>
+      <div class="lp-original">Continue</div>
+      <div class="lp-improved">Pick up where you left off — your future is waiting</div>
+    </div>
+    <div class="label-pair">
+      <div class="lp-label">Referral CTA</div>
+      <div class="lp-original">Share this</div>
+      <div class="lp-improved">Know someone who needs this? Send it to them.</div>
+    </div>
+  </div>
+  <div class="cta-block">
+    <div class="cta-block-head">Want more copy for <em>specific pages?</em></div>
+    <div class="cta-block-sub">Ask for pricing page copy, testimonial templates, email subject lines, or section-specific rewrites.</div>
+    <div class="cta-block-row">
+      <button class="cta-primary" onclick="sendPrompt('Write pricing page copy and email subject lines for SmartGB Global')">Generate more copy ↗</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('visible');
+  btn.classList.add('active');
+}
+</script>
