@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartGB Global — AI &amp; Growth Consulting</title>
+  <meta name="description" content="SmartGB Global builds AI-powered growth systems for modern brands. Page audits, content strategy, brand optimization, AI tool setup, and landing page creation." />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              50:  '#FBF6E4',
+              100: '#F6EBC0',
+              200: '#EFDB8A',
+              300: '#E5C656',
+              400: '#D4AF37',
+              500: '#C29D2A',
+              600: '#A2811E',
+              700: '#7E6517',
+              800: '#5A4910',
+              900: '#3C300A',
+            },
+            ink: {
+              900: '#050505',
+              800: '#0A0A0A',
+              700: '#111111',
+              600: '#1A1A1A',
+              500: '#222222',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+            display: ['"Playfair Display"', 'serif'],
+          },
+          boxShadow: {
+            'gold': '0 10px 40px -10px rgba(212,175,55,0.35)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: #050505;
+      color: #EDEDED;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .gold-text {
+      background: linear-gradient(135deg, #F6EBC0 0%, #D4AF37 45%, #A2811E 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .gold-border {
+      border: 1px solid rgba(212,175,55,0.25);
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0) 100%);
+      backdrop-filter: blur(10px);
+    }
+    .grid-bg {
+      background-image:
+        radial-gradient(circle at 20% 10%, rgba(212,175,55,0.10), transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(212,175,55,0.08), transparent 50%),
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: auto, auto, 64px 64px, 64px 64px;
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, #E5C656 0%, #D4AF37 50%, #A2811E 100%);
+      color: #0A0A0A;
+      transition: all .25s ease;
+      box-shadow: 0 8px 30px -8px rgba(212,175,55,0.55);
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px -10px rgba(212,175,55,0.75);
+      filter: brightness(1.05);
+    }
+    .btn-ghost {
+      border: 1px solid rgba(212,175,55,0.45);
+      color: #E5C656;
+      transition: all .25s ease;
+    }
+    .btn-ghost:hover {
+      background: rgba(212,175,55,0.08);
+      border-color: #D4AF37;
+      color: #F6EBC0;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(212,175,55,0.04) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(212,175,55,0.15);
+      transition: all .3s ease;
+    }
+    .card:hover {
+      border-color: rgba(212,175,55,0.45);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px -20px rgba(212,175,55,0.25);
+    }
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(212,175,55,0.35);
+      background: rgba(212,175,55,0.06);
+      color: #E5C656;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .badge .dot {
+      width: 6px; height: 6px; border-radius: 9999px;
+      background: #D4AF37;
+      box-shadow: 0 0 12px #D4AF37;
+    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .num-tick {
+      font-variant-numeric: tabular-nums;
+    }
+    /* Bar chart */
+    .bar { background: linear-gradient(180deg, #E5C656 0%, #A2811E 100%); border-radius: 4px 4px 0 0; }
+    .bar-ghost { background: rgba(255,255,255,0.06); border-radius: 4px 4px 0 0; }
+
+    /* Marquee */
+    .marquee { display:flex; gap:3rem; animation: scroll 28s linear infinite; }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* Subtle border-glow on hero */
+    .hero-glow::before {
+      content: '';
+      position: absolute; inset: -1px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.4), transparent 30%, transparent 70%, rgba(212,175,55,0.2));
+      border-radius: inherit;
+      z-index: -1;
+      filter: blur(20px);
+      opacity: 0.5;
+    }
+
+    input, textarea {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(212,175,55,0.18);
+      color: #EDEDED;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #D4AF37;
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+    .placeholder-gold::placeholder { color: rgba(212,175,55,0.45); }
+
+    /* SG brand monogram glow */
+    .logo-mark {
+      box-shadow: 0 0 0 1px rgba(212,175,55,0.35), 0 4px 18px -4px rgba(212,175,55,0.45);
+    }
+    .logo-mark span {
+      letter-spacing: -0.02em;
+      transform: translateY(1px);
+    }
+  </style>
+</head>
+<body class="bg-ink-900 text-gray-100">
+
+  <!-- ====== NAV ====== -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3">
+        <img src="logo.png" alt="SmartGB Global" class="logo-mark w-11 h-11 rounded-lg object-cover" />
+        <div class="leading-tight">
+          <div class="font-semibold tracking-wide">SmartGB <span class="gold-text">Global</span></div>
+          <div class="text-[10px] uppercase tracking-[0.2em] text-gold-400/70">AI &amp; Growth Consulting</div>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-7 text-sm text-gray-300">
+        <a href="#services" class="hover:text-gold-300 transition">Services</a>
+        <a href="#audit" class="hover:text-gold-300 transition">Free Audit</a>
+        <a href="#demo" class="hover:text-gold-300 transition">Demo</a>
+        <a href="#projection" class="hover:text-gold-300 transition">Projections</a>
+        <a href="#about" class="hover:text-gold-300 transition">About</a>
+        <a href="#contact" class="hover:text-gold-300 transition">Contact</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <!-- Social icons (desktop) -->
+        <div class="hidden md:flex items-center gap-2">
+          <a href="https://www.linkedin.com/in/alen-sam-11a7b02a8" target="_blank" rel="noopener" aria-label="LinkedIn"
+             class="w-9 h-9 rounded-full flex items-center justify-center gold-border bg-gold-400/5 text-gold-300 hover:text-ink-900 hover:bg-gold-400 transition">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM8.34 18.34H5.67V9.67h2.67v8.67zM7 8.34a1.55 1.55 0 110-3.1 1.55 1.55 0 010 3.1zm11.34 10H15.7v-4.21c0-1 0-2.29-1.4-2.29s-1.6 1.09-1.6 2.22v4.28h-2.67V9.67h2.55v1.17h.04a2.8 2.8 0 012.52-1.38c2.7 0 3.2 1.78 3.2 4.08v4.8z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1HRfYnF7Y8/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"
+             class="w-9 h-9 rounded-full flex items-center justify-center gold-border bg-gold-400/5 text-gold-300 hover:text-ink-900 hover:bg-gold-400 transition">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0022 12z"/></svg>
+          </a>
+        </div>
+        <a href="#audit" class="btn-gold rounded-full px-5 py-2.5 text-sm font-semibold hidden sm:inline-flex">Get Free Audit</a>
+        <button id="menuBtn" class="md:hidden text-gold-300 p-2" aria-label="Open menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden border-t border-white/5 bg-ink-900/95">
+      <div class="px-6 py-4 flex flex-col gap-3 text-sm">
+        <a href="#services" class="py-2 border-b border-white/5">Services</a>
+        <a href="#audit" class="py-2 border-b border-white/5">Free Audit</a>
+        <a href="#demo" class="py-2 border-b border-white/5">Demo</a>
+        <a href="#projection" class="py-2 border-b border-white/5">Projections</a>
+        <a href="#about" class="py-2 border-b border-white/5">About</a>
+        <a href="#contact" class="py-2 border-b border-white/5">Contact</a>
+        <div class="flex items-center gap-3 pt-3">
+          <a href="https://www.linkedin.com/in/alen-sam-11a7b02a8" target="_blank" rel="noopener" aria-label="LinkedIn"
+             class="w-9 h-9 rounded-full flex items-center justify-center gold-border bg-gold-400/5 text-gold-300">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM8.34 18.34H5.67V9.67h2.67v8.67zM7 8.34a1.55 1.55 0 110-3.1 1.55 1.55 0 010 3.1zm11.34 10H15.7v-4.21c0-1 0-2.29-1.4-2.29s-1.6 1.09-1.6 2.22v4.28h-2.67V9.67h2.55v1.17h.04a2.8 2.8 0 012.52-1.38c2.7 0 3.2 1.78 3.2 4.08v4.8z"/></svg>
+          </a>
+          <a href="https://www.facebook.com/share/1HRfYnF7Y8/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"
+             class="w-9 h-9 rounded-full flex items-center justify-center gold-border bg-gold-400/5 text-gold-300">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 10-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 2.89h-2.33v6.99A10 10 0 0022 12z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== HERO ====== -->
+  <section id="top" class="relative pt-32 lg:pt-40 pb-24 lg:pb-32 overflow-hidden grid-bg">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 reveal">
+          <span class="badge mb-6"><span class="dot"></span> New · AI &amp; Growth Consulting</span>
+          <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight">
+            <span class="text-white">AI-powered</span><br/>
+            <span class="gold-text">growth systems</span><br/>
+            <span class="text-white">for modern brands.</span>
+          </h1>
+          <p class="mt-7 max-w-xl text-lg text-gray-400 leading-relaxed">
+            We help founders and small teams turn underperforming pages into compounding growth engines — using a careful mix of audit, strategy, and modern AI tooling. No fluff. No fake numbers.
+          </p>
+          <div class="mt-9 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <a href="#audit" class="btn-gold rounded-full px-7 py-3.5 font-semibold inline-flex items-center gap-2">
+              Get Free Audit
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#demo" class="btn-ghost rounded-full px-7 py-3.5 font-semibold inline-flex items-center gap-2">
+              See a Demo Audit
+            </a>
+          </div>
+
+          <div class="mt-10 flex items-center gap-8 text-xs uppercase tracking-[0.18em] text-gray-500">
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span> Transparent process</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span> Founder-friendly</div>
+            <div class="hidden sm:flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gold-400"></span> Honest projections</div>
+          </div>
+        </div>
+
+        <!-- Hero card -->
+        <div class="lg:col-span-5 reveal">
+          <div class="relative hero-glow rounded-2xl">
+            <div class="card rounded-2xl p-6 lg:p-7">
+              <div class="flex items-center justify-between mb-5">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-gold-400"></span>
+                  <span class="text-xs uppercase tracking-[0.2em] text-gold-300">Sample Audit Snapshot</span>
+                </div>
+                <span class="text-[10px] text-gray-500">Illustrative example</span>
+              </div>
+
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] gold-border">
+                  <div>
+                    <div class="text-sm text-gray-400">Page speed (mobile)</div>
+                    <div class="text-lg font-semibold">42 → <span class="gold-text">86</span></div>
+                  </div>
+                  <svg width="64" height="32" viewBox="0 0 64 32"><polyline fill="none" stroke="#D4AF37" stroke-width="2" points="2,28 14,22 26,24 38,12 50,8 62,4"/></svg>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] gold-border">
+                  <div>
+                    <div class="text-sm text-gray-400">CTA clarity score</div>
+                    <div class="text-lg font-semibold">5.2 → <span class="gold-text">9.0</span></div>
+                  </div>
+                  <svg width="64" height="32" viewBox="0 0 64 32"><polyline fill="none" stroke="#D4AF37" stroke-width="2" points="2,26 14,24 26,18 38,16 50,8 62,6"/></svg>
+                </div>
+                <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] gold-border">
+                  <div>
+                    <div class="text-sm text-gray-400">Content gaps closed</div>
+                    <div class="text-lg font-semibold">3 → <span class="gold-text">14</span></div>
+                  </div>
+                  <svg width="64" height="32" viewBox="0 0 64 32"><polyline fill="none" stroke="#D4AF37" stroke-width="2" points="2,30 14,28 26,22 38,18 50,10 62,5"/></svg>
+                </div>
+              </div>
+
+              <div class="mt-6 pt-5 border-t border-white/5 flex items-center justify-between">
+                <div class="text-xs text-gray-500">Methodology: SmartGB AI Audit Framework</div>
+                <div class="text-[10px] text-gold-300 uppercase tracking-widest">v1.4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== MARQUEE / VALUES ====== -->
+  <section class="py-6 border-y border-white/5 bg-ink-800/40 overflow-hidden">
+    <div class="marquee whitespace-nowrap text-xs uppercase tracking-[0.3em] text-gray-500">
+      <div class="flex gap-12 px-6">
+        <span>· AI Page Audit</span><span>· Content Strategy</span><span>· Brand Optimization</span><span>· AI Tool Setup</span><span>· Landing Page Creation</span><span>· Honest Projections</span><span>· Transparent Process</span>
+      </div>
+      <div class="flex gap-12 px-6">
+        <span>· AI Page Audit</span><span>· Content Strategy</span><span>· Brand Optimization</span><span>· AI Tool Setup</span><span>· Landing Page Creation</span><span>· Honest Projections</span><span>· Transparent Process</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== SERVICES ====== -->
+  <section id="services" class="py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl reveal">
+        <span class="badge"><span class="dot"></span> Services</span>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mt-5 leading-tight">
+          Five focused services. <span class="gold-text">One growth system.</span>
+        </h2>
+        <p class="mt-5 text-gray-400 text-lg">
+          Every engagement starts the same way — diagnose first, prescribe later. Pick a single service or stack the full system.
+        </p>
+      </div>
+
+      <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+        <!-- 1 -->
+        <div class="card rounded-2xl p-7 reveal">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center gold-border bg-gold-400/5 mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          </div>
+          <div class="text-xs text-gold-300 uppercase tracking-widest mb-2">01 — Diagnose</div>
+          <h3 class="text-xl font-semibold mb-2">Page Audit</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">A line-by-line review of your landing or product page. Speed, structure, copy, CTAs, trust signals, and conversion logic — all scored.</p>
+          <ul class="mt-5 space-y-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> 40-point audit checklist</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Prioritised fix list</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Honest scoring</li>
+          </ul>
+        </div>
+
+        <!-- 2 -->
+        <div class="card rounded-2xl p-7 reveal">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center gold-border bg-gold-400/5 mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M4 19h16M4 15h10M4 11h16M4 7h10"/></svg>
+          </div>
+          <div class="text-xs text-gold-300 uppercase tracking-widest mb-2">02 — Plan</div>
+          <h3 class="text-xl font-semibold mb-2">Content Strategy</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">A focused content roadmap — pillars, formats, distribution, and an AI-assisted production cadence built around your actual capacity.</p>
+          <ul class="mt-5 space-y-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Pillar &amp; topic map</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Example post outlines</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Distribution playbook</li>
+          </ul>
+        </div>
+
+        <!-- 3 -->
+        <div class="card rounded-2xl p-7 reveal">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center gold-border bg-gold-400/5 mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M12 2l2.5 7H22l-6 4.5L18.5 21 12 16.8 5.5 21 8 13.5 2 9h7.5z"/></svg>
+          </div>
+          <div class="text-xs text-gold-300 uppercase tracking-widest mb-2">03 — Sharpen</div>
+          <h3 class="text-xl font-semibold mb-2">Brand Optimization</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">We refine your voice, positioning, and visual hierarchy so your brand reads premium — without losing what made it yours.</p>
+          <ul class="mt-5 space-y-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Voice &amp; tone guide</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Positioning rewrite</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Visual hierarchy notes</li>
+          </ul>
+        </div>
+
+        <!-- 4 -->
+        <div class="card rounded-2xl p-7 reveal">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center gold-border bg-gold-400/5 mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </div>
+          <div class="text-xs text-gold-300 uppercase tracking-widest mb-2">04 — Equip</div>
+          <h3 class="text-xl font-semibold mb-2">AI Tool Setup</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">A practical AI stack tailored to your workflow — drafting, research, support, analytics — plus the prompts and templates to actually use it.</p>
+          <ul class="mt-5 space-y-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Tool selection &amp; setup</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Prompt library</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Team SOPs</li>
+          </ul>
+        </div>
+
+        <!-- 5 -->
+        <div class="card rounded-2xl p-7 reveal sm:col-span-2 lg:col-span-1">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center gold-border bg-gold-400/5 mb-5">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M3 4h18v12H3zM8 20h8M12 16v4"/></svg>
+          </div>
+          <div class="text-xs text-gold-300 uppercase tracking-widest mb-2">05 — Launch</div>
+          <h3 class="text-xl font-semibold mb-2">Landing Page Creation</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">A purpose-built landing page — fast, conversion-focused, on-brand — ready to plug into your ads, launch, or campaign.</p>
+          <ul class="mt-5 space-y-2 text-sm text-gray-300">
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Custom design &amp; copy</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Mobile-first build</li>
+            <li class="flex items-center gap-2"><span class="text-gold-400">✦</span> Deploy-ready output</li>
+          </ul>
+        </div>
+
+        <!-- Banner CTA card -->
+        <div class="rounded-2xl p-7 reveal sm:col-span-2 lg:col-span-2 relative overflow-hidden"
+             style="background:linear-gradient(135deg, rgba(212,175,55,0.16), rgba(212,175,55,0.04)); border:1px solid rgba(212,175,55,0.35);">
+          <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full" style="background:radial-gradient(circle,#D4AF37,transparent 65%); opacity:.25"></div>
+          <div class="relative">
+            <div class="text-xs uppercase tracking-[0.25em] text-gold-300 mb-3">Not sure where to start?</div>
+            <h3 class="font-display text-2xl sm:text-3xl font-semibold leading-tight max-w-md">
+              Begin with a <span class="gold-text">free page audit</span> — we'll tell you exactly what to fix first.
+            </h3>
+            <a href="#audit" class="mt-5 inline-flex btn-gold rounded-full px-6 py-3 text-sm font-semibold items-center gap-2">
+              Request Free Audit
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FREE PAGE AUDIT ====== -->
+  <section id="audit" class="py-24 lg:py-32 border-y border-white/5 bg-ink-800/40">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-14 items-start">
+        <div class="reveal">
+          <span class="badge"><span class="dot"></span> Free Page Audit</span>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mt-5 leading-tight">
+            One page. <span class="gold-text">Forty checks.</span> Zero cost.
+          </h2>
+          <p class="mt-5 text-gray-400 text-lg leading-relaxed">
+            Send us a URL. We'll run it through our 40-point audit framework and send back a clear, honest breakdown — what's working, what's silently killing conversions, and what to fix first.
+          </p>
+
+          <div class="mt-10 grid grid-cols-2 gap-4">
+            <div class="card rounded-xl p-5">
+              <div class="text-3xl font-semibold gold-text num-tick">40</div>
+              <div class="text-sm text-gray-400 mt-1">Audit checkpoints</div>
+            </div>
+            <div class="card rounded-xl p-5">
+              <div class="text-3xl font-semibold gold-text num-tick">48h</div>
+              <div class="text-sm text-gray-400 mt-1">Typical turnaround</div>
+            </div>
+            <div class="card rounded-xl p-5">
+              <div class="text-3xl font-semibold gold-text num-tick">$0</div>
+              <div class="text-sm text-gray-400 mt-1">No catch, no card</div>
+            </div>
+            <div class="card rounded-xl p-5">
+              <div class="text-3xl font-semibold gold-text num-tick">1:1</div>
+              <div class="text-sm text-gray-400 mt-1">Review session optional</div>
+            </div>
+          </div>
+
+          <div class="mt-10 space-y-3 text-sm text-gray-300">
+            <div class="flex gap-3"><span class="text-gold-400 mt-1">✓</span> Performance, accessibility, and SEO scan</div>
+            <div class="flex gap-3"><span class="text-gold-400 mt-1">✓</span> Copy clarity, hierarchy, and CTA review</div>
+            <div class="flex gap-3"><span class="text-gold-400 mt-1">✓</span> Trust, social proof, and friction analysis</div>
+            <div class="flex gap-3"><span class="text-gold-400 mt-1">✓</span> Prioritised fix list with effort vs. impact</div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="card rounded-2xl p-8 reveal">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-semibold">Request your free audit</h3>
+            <span class="text-xs text-gold-300 uppercase tracking-widest">Step 1 of 1</span>
+          </div>
+          <form id="auditForm" onsubmit="submitAuditForm(event)" class="space-y-4">
+            <div>
+              <label class="text-xs uppercase tracking-widest text-gray-400">Your name</label>
+              <input id="auditName" type="text" required placeholder="Jane Doe" class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-gray-400">Email</label>
+              <input id="auditEmail" type="email" required placeholder="you@brand.com" class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-gray-400">Page to audit (URL)</label>
+              <input id="auditUrl" type="url" required placeholder="https://yourbrand.com/landing" class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-gray-400">What's the goal of this page?</label>
+              <textarea id="auditGoal" rows="3" placeholder="e.g. signups for our beta waitlist" class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold"></textarea>
+            </div>
+            <button type="submit" class="btn-gold w-full rounded-full px-6 py-3.5 font-semibold inline-flex items-center justify-center gap-2">
+              Send Audit Request
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+            <p class="text-[11px] text-gray-500 text-center">We'll only use your email to send your audit. No spam, ever.</p>
+          </form>
+          <div id="auditSent" class="hidden mt-6 p-4 rounded-lg gold-border bg-gold-400/5 text-sm text-gold-200">
+            ✓ Thanks — your request is queued. We'll be in touch within 48 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== DEMO AUDIT ====== -->
+  <section id="demo" class="py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="max-w-2xl reveal">
+        <span class="badge"><span class="dot"></span> Demo Audit · Example Only</span>
+        <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mt-5 leading-tight">
+          What a real audit <span class="gold-text">looks like.</span>
+        </h2>
+        <p class="mt-5 text-gray-400 text-lg">
+          Below is a <span class="text-gold-300 font-medium">demo audit</span> of a fictional brand, "Northwind Studio." We use this format with every page we review — the brand here isn't real, and the scores are illustrative.
+        </p>
+      </div>
+
+      <div class="mt-14 grid lg:grid-cols-3 gap-6">
+
+        <!-- Scorecard -->
+        <div class="card rounded-2xl p-7 reveal lg:col-span-1">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs uppercase tracking-widest text-gold-300">Sample · Demo</div>
+              <h3 class="text-2xl font-semibold mt-1">Northwind Studio</h3>
+              <div class="text-sm text-gray-400">/pricing landing page</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[11px] uppercase tracking-widest text-gray-500">Overall</div>
+              <div class="text-4xl font-bold gold-text num-tick">62</div>
+              <div class="text-[11px] text-gray-500">/ 100</div>
+            </div>
+          </div>
+
+          <div class="mt-7 space-y-4">
+            <!-- score rows -->
+            <div>
+              <div class="flex justify-between text-sm mb-1.5"><span>Performance</span><span class="text-gold-300 num-tick">71</span></div>
+              <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full" style="width:71%;background:linear-gradient(90deg,#E5C656,#A2811E)"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1.5"><span>Clarity &amp; copy</span><span class="text-gold-300 num-tick">54</span></div>
+              <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full" style="width:54%;background:linear-gradient(90deg,#E5C656,#A2811E)"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1.5"><span>Conversion flow</span><span class="text-gold-300 num-tick">48</span></div>
+              <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full" style="width:48%;background:linear-gradient(90deg,#E5C656,#A2811E)"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1.5"><span>Trust signals</span><span class="text-gold-300 num-tick">66</span></div>
+              <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full" style="width:66%;background:linear-gradient(90deg,#E5C656,#A2811E)"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1.5"><span>SEO basics</span><span class="text-gold-300 num-tick">73</span></div>
+              <div class="h-1.5 rounded-full bg-white/5 overflow-hidden"><div class="h-full" style="width:73%;background:linear-gradient(90deg,#E5C656,#A2811E)"></div></div>
+            </div>
+          </div>
+
+          <div class="mt-7 pt-5 border-t border-white/5 text-xs text-gray-500">Scores are illustrative for a fictional brand.</div>
+        </div>
+
+        <!-- Findings -->
+        <div class="card rounded-2xl p-7 reveal lg:col-span-2">
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="text-xl font-semibold">Top findings <span class="text-gold-300 text-sm font-normal">(example)</span></h3>
+            <span class="badge"><span class="dot"></span> Demo Output</span>
+          </div>
+
+          <div class="space-y-4">
+            <div class="p-5 rounded-xl bg-white/[0.02] gold-border">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-md flex items-center justify-center text-ink-900 font-bold bg-gold-400">1</div>
+                <div>
+                  <div class="font-semibold">Hero promise is feature-led, not outcome-led</div>
+                  <div class="text-sm text-gray-400 mt-1">"Powerful dashboards" tells visitors what it is. Rewrite to lead with what changes for them — e.g. "Cut reporting time in half."</div>
+                  <div class="mt-3 flex items-center gap-3 text-xs">
+                    <span class="text-gold-300">Impact: High</span>
+                    <span class="text-gray-500">·</span>
+                    <span class="text-gray-400">Effort: Low</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-xl bg-white/[0.02] gold-border">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-md flex items-center justify-center text-ink-900 font-bold bg-gold-400">2</div>
+                <div>
+                  <div class="font-semibold">Primary CTA appears below the fold on mobile</div>
+                  <div class="text-sm text-gray-400 mt-1">Move "Start free trial" above the fold and reduce the navigation height on small screens.</div>
+                  <div class="mt-3 flex items-center gap-3 text-xs">
+                    <span class="text-gold-300">Impact: High</span>
+                    <span class="text-gray-500">·</span>
+                    <span class="text-gray-400">Effort: Low</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-xl bg-white/[0.02] gold-border">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-md flex items-center justify-center text-ink-900 font-bold bg-gold-400">3</div>
+                <div>
+                  <div class="font-semibold">No social proof near the pricing decision</div>
+                  <div class="text-sm text-gray-400 mt-1">Add a single, specific quote or a logo strip next to pricing tiers to reduce hesitation at the decision moment.</div>
+                  <div class="mt-3 flex items-center gap-3 text-xs">
+                    <span class="text-gold-300">Impact: Medium</span>
+                    <span class="text-gray-500">·</span>
+                    <span class="text-gray-400">Effort: Low</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-xl bg-white/[0.02] gold-border">
+              <div class="flex items-start gap-4">
+                <div class="w-8 h-8 rounded-md flex items-center justify-center text-ink-900 font-bold bg-gold-400">4</div>
+                <div>
+                  <div class="font-semibold">Hero image is 1.4MB unoptimised</div>
+                  <div class="text-sm text-gray-400 mt-1">Compress to WebP under 200KB and lazy-load below-the-fold media to improve LCP.</div>
+                  <div class="mt-3 flex items-center gap-3 text-xs">
+                    <span class="text-gold-300">Impact: Medium</span>
+                    <span class="text-gray-500">·</span>
+                    <span class="text-gray-400">Effort: Low</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-10 text-center text-xs text-gray-500 reveal">Northwind Studio is a fictional brand used to illustrate our audit format. Your real audit will use your actual page.</p>
+    </div>
+  </section>
+
+  <!-- ====== SAMPLE PROJECTION ====== -->
+  <section id="projection" class="py-24 lg:py-32 border-y border-white/5 bg-ink-800/40">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5 reveal">
+          <span class="badge"><span class="dot"></span> Sample Projection</span>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mt-5 leading-tight">
+            An honest look at <span class="gold-text">what growth could look like.</span>
+          </h2>
+          <p class="mt-5 text-gray-400 text-lg leading-relaxed">
+            This is a <span class="text-gold-300 font-medium">sample projection</span> — not a guarantee. It shows how a typical small brand might see compounding gains across a 90-day engagement if recommended changes are implemented and traffic stays stable.
+          </p>
+
+          <div class="mt-8 space-y-3 text-sm text-gray-300">
+            <div class="flex gap-3"><span class="text-gold-400 mt-1">●</span> Numbers below are illustrative, based on industry benchmarks.</div>
+            <div class="flex gap-3"><span class="text-gold-400 mt-1">●</span> Actual results depend on niche, audience, offer, and effort.</div>
+            <div class="flex gap-3"><span class="text-gold-400 mt-1">●</span> We don't promise multiples. We promise a clear plan.</div>
+          </div>
+
+          <div class="mt-10 p-5 rounded-xl gold-border bg-gold-400/5 text-sm text-gold-200">
+            <strong class="text-gold-300">Note:</strong> We will never quote you a guaranteed return. Anyone who does is selling a story, not a system.
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="lg:col-span-7 reveal">
+          <div class="card rounded-2xl p-6 lg:p-8">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <div class="text-xs uppercase tracking-widest text-gold-300">Example · Sample Projection</div>
+                <h3 class="text-xl font-semibold mt-1">Conversion rate trajectory (90 days)</h3>
+              </div>
+              <div class="hidden sm:flex items-center gap-4 text-xs">
+                <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm" style="background:linear-gradient(180deg,#E5C656,#A2811E)"></span>Projected</span>
+                <span class="flex items-center gap-2"><span class="w-3 h-3 rounded-sm bg-white/10"></span>Baseline</span>
+              </div>
+            </div>
+
+            <!-- Chart bars -->
+            <div class="grid grid-cols-12 gap-2 h-56 items-end">
+              <!-- baseline (ghost) overlay via two bars per month -->
+              <!-- We'll show 6 month labels with double bars each (12 cols total)-->
+              <div class="bar-ghost" style="height:30%"></div>
+              <div class="bar" style="height:34%"></div>
+
+              <div class="bar-ghost" style="height:32%"></div>
+              <div class="bar" style="height:42%"></div>
+
+              <div class="bar-ghost" style="height:31%"></div>
+              <div class="bar" style="height:51%"></div>
+
+              <div class="bar-ghost" style="height:33%"></div>
+              <div class="bar" style="height:62%"></div>
+
+              <div class="bar-ghost" style="height:32%"></div>
+              <div class="bar" style="height:73%"></div>
+
+              <div class="bar-ghost" style="height:34%"></div>
+              <div class="bar" style="height:85%"></div>
+            </div>
+            <div class="grid grid-cols-6 mt-3 text-[11px] text-gray-500">
+              <div class="text-center">Wk 1-2</div>
+              <div class="text-center">Wk 3-4</div>
+              <div class="text-center">Wk 5-6</div>
+              <div class="text-center">Wk 7-8</div>
+              <div class="text-center">Wk 9-10</div>
+              <div class="text-center">Wk 11-12</div>
+            </div>
+
+            <div class="mt-8 grid grid-cols-3 gap-4">
+              <div class="p-4 rounded-lg bg-white/[0.02] gold-border">
+                <div class="text-[10px] uppercase tracking-widest text-gray-500">Baseline CR</div>
+                <div class="text-xl font-semibold mt-1 num-tick">1.2%</div>
+              </div>
+              <div class="p-4 rounded-lg bg-white/[0.02] gold-border">
+                <div class="text-[10px] uppercase tracking-widest text-gray-500">Projected CR</div>
+                <div class="text-xl font-semibold gold-text mt-1 num-tick">2.4–3.1%</div>
+              </div>
+              <div class="p-4 rounded-lg bg-white/[0.02] gold-border">
+                <div class="text-[10px] uppercase tracking-widest text-gray-500">Confidence</div>
+                <div class="text-xl font-semibold mt-1">Moderate</div>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-gray-500 mt-5">Illustrative scenario. Past projections do not guarantee future outcomes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== ABOUT ====== -->
+  <section id="about" class="py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5 reveal">
+          <span class="badge"><span class="dot"></span> About</span>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mt-5 leading-tight">
+            SmartGB <span class="gold-text">Global.</span>
+          </h2>
+          <p class="mt-5 text-gray-400 text-lg leading-relaxed">
+            SmartGB Global is a small AI growth studio built for founders, creators, and lean teams. We pair sharp strategy with modern AI tooling — and refuse to make claims we can't back up.
+          </p>
+          <p class="mt-4 text-gray-400 leading-relaxed">
+            We're not a 200-person agency. That's the point. You get senior thinking, direct communication, and work that gets shipped — not slide decks about work that might one day get shipped.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <span class="px-3 py-1.5 rounded-full text-xs gold-border text-gold-300">Founder-friendly</span>
+            <span class="px-3 py-1.5 rounded-full text-xs gold-border text-gold-300">Transparent pricing</span>
+            <span class="px-3 py-1.5 rounded-full text-xs gold-border text-gold-300">Honest reporting</span>
+            <span class="px-3 py-1.5 rounded-full text-xs gold-border text-gold-300">AI-native workflow</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 reveal grid sm:grid-cols-2 gap-5">
+          <div class="card rounded-2xl p-7">
+            <div class="text-xs uppercase tracking-widest text-gold-300">Principle 01</div>
+            <h3 class="text-xl font-semibold mt-2">Honest before clever</h3>
+            <p class="text-gray-400 text-sm mt-3 leading-relaxed">If a tactic won't move your numbers, we'll tell you — even if we could sell it to you.</p>
+          </div>
+          <div class="card rounded-2xl p-7">
+            <div class="text-xs uppercase tracking-widest text-gold-300">Principle 02</div>
+            <h3 class="text-xl font-semibold mt-2">Diagnose, then prescribe</h3>
+            <p class="text-gray-400 text-sm mt-3 leading-relaxed">Every project starts with an audit. Strategy without diagnosis is decoration.</p>
+          </div>
+          <div class="card rounded-2xl p-7">
+            <div class="text-xs uppercase tracking-widest text-gold-300">Principle 03</div>
+            <h3 class="text-xl font-semibold mt-2">AI as leverage, not a gimmick</h3>
+            <p class="text-gray-400 text-sm mt-3 leading-relaxed">We use AI where it genuinely speeds up real work — not as a marketing sticker.</p>
+          </div>
+          <div class="card rounded-2xl p-7">
+            <div class="text-xs uppercase tracking-widest text-gold-300">Principle 04</div>
+            <h3 class="text-xl font-semibold mt-2">Small enough to care</h3>
+            <p class="text-gray-400 text-sm mt-3 leading-relaxed">You'll talk to the people doing the work. Always.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CONTACT ====== -->
+  <section id="contact" class="py-24 lg:py-32 border-t border-white/5 relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg opacity-50"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
+      <div class="grid lg:grid-cols-12 gap-12">
+        <div class="lg:col-span-6 reveal">
+          <span class="badge"><span class="dot"></span> Contact</span>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mt-5 leading-tight">
+            Let's see what your page is <span class="gold-text">really doing.</span>
+          </h2>
+          <p class="mt-5 text-gray-400 text-lg leading-relaxed">
+            Tell us about your brand and what you'd like to grow. We reply to every message within one business day.
+          </p>
+
+          <div class="mt-10 space-y-5 text-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg gold-border flex items-center justify-center bg-gold-400/5">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M4 4h16v16H4zM4 4l8 8 8-8"/></svg>
+              </div>
+              <div>
+                <div class="text-xs uppercase tracking-widest text-gray-500">Email</div>
+                <a href="mailto:smartgbmedia@gmail.com" class="text-gold-300 hover:underline">smartgbmedia@gmail.com</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg gold-border flex items-center justify-center bg-gold-400/5">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M21.5 4.5L2.5 12l5.5 2 2 6 3-4 5 4 3.5-15.5z"/></svg>
+              </div>
+              <div>
+                <div class="text-xs uppercase tracking-widest text-gray-500">Telegram</div>
+                <a href="https://t.me/SmartGBGlobal_bot" target="_blank" rel="noopener" class="text-gold-300 hover:underline">@SmartGBGlobal_bot</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-lg gold-border flex items-center justify-center bg-gold-400/5">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              </div>
+              <div>
+                <div class="text-xs uppercase tracking-widest text-gray-500">Response time</div>
+                <div class="text-gray-300">Within 1 business day</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 reveal">
+          <form id="contactForm" onsubmit="submitContactForm(event)" class="card rounded-2xl p-8 space-y-4">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="text-xs uppercase tracking-widest text-gray-400">Name</label>
+                <input id="contactName" type="text" required class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold" placeholder="Your name" />
+              </div>
+              <div>
+                <label class="text-xs uppercase tracking-widest text-gray-400">Email</label>
+                <input id="contactEmail" type="email" required class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold" placeholder="you@brand.com" />
+              </div>
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-gray-400">Brand or company</label>
+              <input id="contactBrand" type="text" class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold" placeholder="SmartGB Global" />
+            </div>
+            <div>
+              <label class="text-xs uppercase tracking-widest text-gray-400">What are you trying to grow?</label>
+              <textarea id="contactMessage" rows="4" class="w-full mt-2 rounded-lg px-4 py-3 placeholder-gold" placeholder="Tell us about your offer, audience, and what's stuck right now."></textarea>
+            </div>
+            <button class="btn-gold w-full rounded-full px-6 py-3.5 font-semibold inline-flex items-center justify-center gap-2">
+              Send Message
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </button>
+            <p class="text-[11px] text-gray-500 text-center">By submitting, you agree to be contacted about your inquiry. We don't share your email.</p>
+            <div id="contactSent" class="hidden p-4 rounded-lg gold-border bg-gold-400/5 text-sm text-gold-200">
+              ✓ Message received. We'll be in touch shortly.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== QUICK CONTACT STRIP ====== -->
+  <section id="quick-contact" class="py-14 border-t border-white/5 bg-ink-800/40">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <div>
+          <span class="badge"><span class="dot"></span> Reach SmartGB Global</span>
+          <h3 class="font-display text-2xl sm:text-3xl font-semibold mt-4 leading-tight">
+            Direct lines to the <span class="gold-text">studio.</span>
+          </h3>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full lg:w-auto lg:min-w-[820px]">
+          <!-- Email -->
+          <a href="mailto:smartgbmedia@gmail.com" class="card rounded-xl p-5 flex items-center gap-4 group">
+            <div class="w-10 h-10 rounded-lg gold-border flex items-center justify-center bg-gold-400/5 flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M4 4h16v16H4zM4 4l8 8 8-8"/></svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase tracking-widest text-gray-500">Email</div>
+              <div class="text-sm text-gold-300 truncate group-hover:underline">smartgbmedia@gmail.com</div>
+            </div>
+          </a>
+
+          <!-- Telegram -->
+          <a href="https://t.me/SmartGBGlobal_bot" target="_blank" rel="noopener" class="card rounded-xl p-5 flex items-center gap-4 group">
+            <div class="w-10 h-10 rounded-lg gold-border flex items-center justify-center bg-gold-400/5 flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M21.5 4.5L2.5 12l5.5 2 2 6 3-4 5 4 3.5-15.5z"/></svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase tracking-widest text-gray-500">Telegram</div>
+              <div class="text-sm text-gold-300 truncate group-hover:underline">@SmartGBGlobal_bot</div>
+            </div>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/alen-sam-11a7b02a8" target="_blank" rel="noopener" class="card rounded-xl p-5 flex items-center gap-4 group">
+            <div class="w-10 h-10 rounded-lg gold-border flex items-center justify-center bg-gold-400/5 flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 014 0v4M12 13v4"/></svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase tracking-widest text-gray-500">LinkedIn</div>
+              <div class="text-sm text-gold-300 truncate group-hover:underline">Alen Sam</div>
+            </div>
+          </a>
+
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/share/1HRfYnF7Y8/?mibextid=wwXIfr" target="_blank" rel="noopener" class="card rounded-xl p-5 flex items-center gap-4 group">
+            <div class="w-10 h-10 rounded-lg gold-border flex items-center justify-center bg-gold-400/5 flex-shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.8"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] uppercase tracking-widest text-gray-500">Facebook</div>
+              <div class="text-sm text-gold-300 truncate group-hover:underline">SmartGB Global</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="border-t border-white/5 bg-ink-900">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-14">
+      <div class="grid md:grid-cols-12 gap-10">
+        <div class="md:col-span-5">
+          <a href="#top" class="flex items-center gap-3">
+            <img src="logo.png" alt="SmartGB Global" class="logo-mark w-11 h-11 rounded-lg object-cover" />
+            <div class="leading-tight">
+              <div class="font-semibold tracking-wide">SmartGB <span class="gold-text">Global</span></div>
+              <div class="text-[10px] uppercase tracking-[0.2em] text-gold-400/70">AI &amp; Growth Consulting</div>
+            </div>
+          </a>
+          <p class="mt-5 text-sm text-gray-400 max-w-sm">AI-powered growth systems for modern brands. Honest audits, focused strategy, deploy-ready work.</p>
+        </div>
+
+        <div class="md:col-span-3">
+          <div class="text-xs uppercase tracking-widest text-gold-300 mb-4">Studio</div>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#services" class="hover:text-gold-300">Services</a></li>
+            <li><a href="#audit" class="hover:text-gold-300">Free Audit</a></li>
+            <li><a href="#demo" class="hover:text-gold-300">Demo</a></li>
+            <li><a href="#about" class="hover:text-gold-300">About</a></li>
+          </ul>
+        </div>
+
+        <div class="md:col-span-4">
+          <div class="text-xs uppercase tracking-widest text-gold-300 mb-4">Contact</div>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="mailto:smartgbmedia@gmail.com" class="hover:text-gold-300">smartgbmedia@gmail.com</a></li>
+            <li><a href="https://t.me/SmartGBGlobal_bot" target="_blank" rel="noopener" class="hover:text-gold-300">Telegram · @SmartGBGlobal_bot</a></li>
+            <li><a href="https://www.linkedin.com/in/alen-sam-11a7b02a8" target="_blank" rel="noopener" class="hover:text-gold-300">LinkedIn · Alen Sam</a></li>
+            <li><a href="https://www.facebook.com/share/1HRfYnF7Y8/?mibextid=wwXIfr" target="_blank" rel="noopener" class="hover:text-gold-300">Facebook · SmartGB Global</a></li>
+            <li>Response within 1 business day</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="divider my-10"></div>
+
+      <div class="flex flex-col sm:flex-row justify-between gap-4 text-xs text-gray-500">
+        <div>© <span id="year"></span> SmartGB Global. All rights reserved.</div>
+        <div class="flex gap-5">
+          <a href="#" class="hover:text-gold-300">Privacy</a>
+          <a href="#" class="hover:text-gold-300">Terms</a>
+          <a href="#contact" class="hover:text-gold-300">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+      mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+    }
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal-on-scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }});
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Audit form: open user's email client with a prefilled message to smartgbmedia@gmail.com
+    function submitAuditForm(e) {
+      e.preventDefault();
+      const name  = document.getElementById('auditName').value.trim();
+      const email = document.getElementById('auditEmail').value.trim();
+      const url   = document.getElementById('auditUrl').value.trim();
+      const goal  = document.getElementById('auditGoal').value.trim();
+
+      const subject = `Free Page Audit Request — ${name || 'New lead'}`;
+      const body =
+        `Hi SmartGB Global team,\n\n` +
+        `I'd like to request a free page audit.\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Page to audit: ${url}\n` +
+        `Goal of this page: ${goal || '—'}\n\n` +
+        `Thanks!`;
+
+      const mailto = `mailto:smartgbmedia@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      document.getElementById('auditSent').classList.remove('hidden');
+      document.getElementById('auditForm').reset();
+    }
+
+    // Contact form: same pattern — open email client with a prefilled message
+    function submitContactForm(e) {
+      e.preventDefault();
+      const name    = document.getElementById('contactName').value.trim();
+      const email   = document.getElementById('contactEmail').value.trim();
+      const brand   = document.getElementById('contactBrand').value.trim();
+      const message = document.getElementById('contactMessage').value.trim();
+
+      const subject = `New Inquiry — ${brand || name || 'SmartGB Global'}`;
+      const body =
+        `Hi SmartGB Global team,\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n` +
+        `Brand: ${brand || '—'}\n\n` +
+        `What I'm trying to grow:\n${message || '—'}\n\n` +
+        `Thanks!`;
+
+      const mailto = `mailto:smartgbmedia@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
+      document.getElementById('contactSent').classList.remove('hidden');
+      document.getElementById('contactForm').reset();
+    }
+  </script>
+</body>
+</html>
